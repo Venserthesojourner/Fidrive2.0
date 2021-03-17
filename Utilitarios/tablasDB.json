@@ -1,0 +1,42 @@
+{
+    "archivocargado": {
+        "idarchivocargado": "",
+        "acnombre": "",
+        "acdescripcion": "",
+        "acicono": "",
+        "idusuario": "",
+        "aclinkacceso": "",
+        "accantidaddescarga": "",
+        "accantidadusada": "",
+        "acfechainiciocompartir": "",
+        "acefechafincompartir": "",
+        "acprotegidoclave": ""
+    },
+    "archivocargadoestado": {
+        "idarchivocargadoestado": "",
+        "idusuario": "",
+        "idarchivocargado": "",
+        "idestadotipos": "",
+        "acedescripcion": "",
+        "acefechainicio": "",
+        "acefechafin": ""
+    },
+    "estadotipos": {
+        "idestadotipos": "",
+        "etdescripcion": "",
+        "etactivo": ""
+    },
+    "usuario": {
+        "idusuario": "",
+        "usnombre": "",
+        "usapellido": "",
+        "uslogin": "",
+        "usclave": "",
+        "usactivo": ""
+    },
+    "rol": {
+        "idrol": "",
+        "roldescripcion": "",
+        "cantGBdisponibles": ""
+    }
+}

@@ -1,0 +1,7 @@
+1: Guardar la informacion de texto enriquecido en un archivo JSON dentro de la carpeta de archivos.
+2: Leer el archivo generado de esta forma, recuperando su formato inclusive
+
+3: Con respecto a los roles, agregar una funcionalidad que permita limitar la capacidad maxima de almacenaje de archivos dependiendo del roles
+4: Mostrar esa informacion por pantalla en la respectiva cuenta de usuario.
+
+

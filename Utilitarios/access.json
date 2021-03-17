@@ -1,0 +1,78 @@
+{
+    "Default Site": {
+
+        "admin": "archivoscargados.php",
+        "novato": "archivoscargados.php",
+        "avanzado": "archivoscargados.php",
+        "veterano": "archivoscargados.php",
+        "premium": "archivoscargados.php"
+
+    },
+    "Sites": [{
+            "site": "login.php",
+            "access": "public",
+            "role": [""]
+        },
+        {
+            "site": "amarchivo.php",
+            "access": "private",
+            "role": ["admin", "novato"]
+        },
+        {
+            "site": "archivoscargados.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "archivoscargados.php",
+            "access": "private",
+            "role": "novato"
+        },
+        {
+            "site": "eliminararchivos.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "eliminararchivos.php",
+            "access": "private",
+            "role": "novato"
+        },
+        {
+            "site": "eliminararchivos.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "eliminararchivos.php",
+            "access": "private",
+            "role": "novato"
+        },
+        {
+            "site": "eliminararchivocompartido.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "eliminararchivocompartido.php",
+            "access": "private",
+            "role": "novato"
+        },
+        {
+            "site": "administrarusuarios.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "administrarroles.php",
+            "access": "private",
+            "role": "admin"
+        },
+        {
+            "site": "administrarcontenido.php",
+            "access": "private",
+            "role": "admin"
+        }
+    ]
+
+}

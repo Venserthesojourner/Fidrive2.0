@@ -28,16 +28,16 @@ function data_submitted()
 	$_AAux = array();
 	$_AAux2 = array();
 	if (!empty($_POST))
-	array_push($_AAux,$_POST);
+		array_push($_AAux, $_POST);
 	if (!empty($_GET))
-	array_push($_AAux,$_GET);
+		array_push($_AAux, $_GET);
 	if (!empty($_FILES))
-	array_push($_AAux,$_FILES);
+		array_push($_AAux, $_FILES);
 	if (count($_AAux)) {
 		foreach ($_AAux as $indice => $valor) {
-			foreach ($valor as $indiceb => $valorb){
+			foreach ($valor as $indiceb => $valorb) {
 				if ($valor != "")
-				$_AAux2[$indiceb] = $valorb;
+					$_AAux2[$indiceb] = $valorb;
 			}
 		}
 	}
@@ -81,16 +81,7 @@ function verEstructura($e)
 	echo "</pre>";
 }
 
-function userselector($listado)
-{
-	$block = "";
-	foreach ($listado as $user) {
-		$valor = $user->getIduser();
-		$tag = $user->getUname();
-		$block .= "<option value='{$valor}'>{$tag}</option>";
-	}
-	return $block;
-}
+
 
 function obtenerArchivos($folder)
 {
@@ -113,7 +104,7 @@ function obtenerArchivos($folder)
 	return $archivos;
 }
 
-function crearDirectorio()
+function crearDirectorio($datos)
 {
 	$base = $datos['name'];
 	$folder = $datos['foldername'];
@@ -123,15 +114,17 @@ function crearDirectorio()
 
 function subirArchivo($datos)
 {
-	
+
 	//Seleccionamos la carpeta
 
 	$carpeta = "";
 	$opcion = $datos['icono'];
+	$username = (new controlSession)->sesionActual()->obtenerDatosSession("uslogin");
+	$usuario = (new decoUsuarioController(new databaseController))->buscarElemento((new usuario), ["usLogin" => $username]);
 
 	//echo $opcion."<br>";
 
-	switch($opcion){
+	switch ($opcion) {
 		case "pdf":
 			$carpeta = "documentos.pdf";
 			break;
@@ -148,14 +141,19 @@ function subirArchivo($datos)
 			$carpeta = "documentos.img";
 			break;
 	}
+
 	// Generamos el target_dir y el $target_file
 
 	//echo $carpeta."<br>";
 
-	$target_dir = $GLOBALS["ROOT"]."Vistas/FILE$/".$carpeta;
-	
-	$target_file = $target_dir . '/' . $datos['name'].".".$opcion;
+	$target_dir = $GLOBALS["ROOT"] . "Vistas/FILE$/" . $carpeta;
+
+	$target_file = $target_dir . '/' . $datos['name'] . "." . $opcion;
 	//echo $target_file;
 
-	move_uploaded_file($datos['archive']['tmp_name'],$target_file);
+	move_uploaded_file($datos['archive']['tmp_name'], $target_file);
+
+	if (!file_exists($usuario->getIduser())) {
+		mkdir("{$target_dir}{$usuario->getIduser()}/{$archivoID}/", 0777, true);
+	}
 }

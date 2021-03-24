@@ -1,11 +1,7 @@
 <?php
 $cardtitle = "Exito";
-include_once ('../../Vistas/Basicframe/header.php');
+include_once('../../Vistas/Basicframe/header.php');
 
-//verEstructura($datos);
-
-controlDB::cargarObjeto($datos,1);
+(new databaseController)->altaArchivo($datos);
 
 subirarchivo($datos);
-
-?>

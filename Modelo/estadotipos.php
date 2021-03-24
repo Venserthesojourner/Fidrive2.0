@@ -1,23 +1,26 @@
 <?php
 
-class estadotipos {
+class estadotipos
+{
     private $idEstado;
     private $tipoEstado;
     private $descEstado;
     private static $mensajedeoperacion;
 
     /**
-    * METODOS CONSTRUCTORES:
-    */
+     * METODOS CONSTRUCTORES:
+     */
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->idEstado = 0;
         $this->tipoEstado = 1;
         $this->descEstado = "";
         self::$mensajedeoperacion = "";
     }
 
-    public static function eT_construct($param){
+    public static function eT_construct($param)
+    {
         $obj = new estadotipos();
         $obj->setIdEstado($param['idestadotipos']);
         $obj->setTipoEstado($param['etactivo']);
@@ -25,45 +28,68 @@ class estadotipos {
         return $obj;
     }
 
-    public function cargar($id,$tipo,$desc){
+    public function cargar($id, $tipo, $desc)
+    {
         $this->setIdEstado($id);
         $this->setTipoEstado($tipo);
         $this->setDescEstado($desc);
     }
 
-    public function setIdEstado($idEstado){$this->idEstado = $idEstado;}
-    public function setTipoEstado($tipoEstado){$this->tipoEstado = $tipoEstado;}
-    public function setDescEstado($descEstado){$this->descEstado = $descEstado;}
-    private static function setMensajeOperacion($mensaje){self::$mensajedeoperacion = $mensaje;}
+    public function setIdEstado($idEstado)
+    {
+        $this->idEstado = $idEstado;
+    }
+    public function setTipoEstado($tipoEstado)
+    {
+        $this->tipoEstado = $tipoEstado;
+    }
+    public function setDescEstado($descEstado)
+    {
+        $this->descEstado = $descEstado;
+    }
+    private static function setMensajeOperacion($mensaje)
+    {
+        self::$mensajedeoperacion = $mensaje;
+    }
 
-    public function getIdEstado() {return $this->idEstado;}    
-    public function getTipoEstado(){return $this->tipoEstado;}    
-    public function getDescEstado(){return $this->descEstado;}
-    private static function getMensajedeoperacion(){return self::$mensajedeoperacion;}
-    
+    public function getIdEstado()
+    {
+        return $this->idEstado;
+    }
+    public function getTipoEstado()
+    {
+        return $this->tipoEstado;
+    }
+    public function getDescEstado()
+    {
+        return $this->descEstado;
+    }
+    private static function getMensajedeoperacion()
+    {
+        return self::$mensajedeoperacion;
+    }
+
 
     /* Metodos SQL*/
-    public function insertDB(){
+    public function insertDB(): bool
+    {
         $base = new BaseDatos();
         $resp = false;
 
         $consulta = "INSERT INTO estadotipos (etdescripcion,etactivo) VALUES ('{$this->getDescEstado()}','{$this->getTipoEstado()}')";
 
-        if ($base->Iniciar()){
+        if ($base->Iniciar()) {
 
             $sqlresponse = $base->Ejecutar($consulta);
 
-            if ( $sqlresponse != -1){
+            if ($sqlresponse != -1) {
                 // Como la operacion fue exitosa obtuvimos el id del estado.
                 $this->setIdEstado($sqlresponse);
                 $resp = true;
-
             } else {
                 // Mensaje de error: Fallo de Consulta
                 self::setMensajeOperacion("Estado Tipos->Insertar: {$base->getError()}");
             }
-
-
         } else {
             // Mensaje de error: Fallo de conexion
             self::setMensajeOperacion("Estado Tipos->Insertar: {$base->getError()}");
@@ -72,32 +98,32 @@ class estadotipos {
         return $resp;
     }
 
-    public static function listarDB ($condicion = ""){
+    public static function listarDB($condicion = ""): array
+    {
         $base = new BaseDatos();
         $listado = array();
 
         /*Generamos la consulta correspondiente*/
         $consulta = "SELECT * FROM estadotipos";
-        if ($condicion != ""){
+        if ($condicion != "") {
             $consulta = "{$consulta} WHERE {$condicion}";
         }
         $consulta = "{$consulta} ORDER BY idestadotipos";
 
-        if ($base->Iniciar()){
+        if ($base->Iniciar()) {
 
-            if ($base ->Ejecutar($consulta)){
-                
-                while ( $row2 = $base->Registro() ){
+            if ($base->Ejecutar($consulta)) {
+
+                while ($row2 = $base->Registro()) {
 
                     $id = $row2['idestadotipos'];
                     $desc = $row2['etdescripcion'];
                     $tipo = $row2['etactivo'];
 
                     //Creamos el objeto de la clase
-                    $newOBJET = self::eT_construct($id,$desc,$tipo);
-                    array_push($listado,$newOBJET);
+                    $newOBJET = self::eT_construct($id, $desc, $tipo);
+                    array_push($listado, $newOBJET);
                 }
-
             } else {
                 // Mensaje de error: Fallo de Consulta
                 self::setMensajeOperacion("Estado Tipos->Listar: {$base->getError()}");
@@ -108,17 +134,17 @@ class estadotipos {
         }
 
         return $listado;
-
     }
 
-    public static function buscarDB ($campo, $parametro){
-        $base = new BaseDatos ();
+    public static function buscarDB($campo, $parametro): estadotipos
+    {
+        $base = new BaseDatos();
         $consulta = "SELECT * FROM estadotipos WHERE {$campo} = {$parametro}";
         $find = null;
-        
-        if ($base->Iniciar()){
-            if ($base->Ejecutar ( $consulta )) {
-                $row2 = $base->Registro ();
+
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($consulta)) {
+                $row2 = $base->Registro();
 
                 //Creamos el objeto de la clase
                 $find = self::eT_construct($row2);
@@ -134,22 +160,14 @@ class estadotipos {
         return $find;
     }
 
-    public function actualizardDB ($parametros){
+    public function actualizardDB($condicion): int
+    {
         $resp = 0;
         $base = new BaseDatos();
         $ref = $this->getIdEstado();
-        if ($base->Iniciar()){
-            foreach ($parametros as $clave => $parametro){
-            $consulta = "UPDATE estadotipos SET {$clave}={$parametro} WHERE idestadotipos = {$ref}";
-            echo $consulta;
-            if ($base->Ejecutar ( $consulta )) {
-                $resp++;
-            } else {
-                //Mensaje de Error: Fallo de Conexion
-                self::setMensajeoperacion("Estado Tipo-> Actualizar-FL: {$base->getError()}");
-            }
-            }
-
+        if ($base->Iniciar()) {
+            $consulta = "UPDATE estadotipos SET $condicion WHERE idestadotipos = {$ref}";
+            $resp = $base->Ejecutar($consulta);
         } else {
             //Mensaje de Error: Fallo de Conexion
             self::setMensajeoperacion("Estado Tipo-> Actualizar-FL: {$base->getError()}");
@@ -157,4 +175,3 @@ class estadotipos {
         return $resp;
     }
 }
-?>

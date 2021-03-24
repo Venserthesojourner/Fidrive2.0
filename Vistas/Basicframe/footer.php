@@ -3,29 +3,30 @@
 </div>
 <?php
 
-if(!strpos($_SERVER['REQUEST_URI'],"archivoscargados.php")===False){ ?>
-<div class="col col-md-3">
-    <div class="card" id="cardyb">
-        <div class="card-header bg-info">
-            <b class="fas fa-h1">Recientes</b>
-        </div>
-        <div class="card-body bg-light">
-
-
-            <div class="row">
-                <hr>
-                Link: <a href="unlugar.php"> <?php echo $link = md5("unlinkcualquiera");?></a><br>
-                <br><hr>
-                Nombre: <?php echo $Nombre = "LuigiPhoto.jpg"; ?><br>
-                Usuario: <?php echo $Usuario = "Luigi"; ?><br>
-                Hace <?php echo $horas = 5 ;?> Horas<br>
-                <hr>
-                                
+if (!strpos($_SERVER['REQUEST_URI'], "archivoscargados.php") === False) { ?>
+    <div class="col col-md-3">
+        <div class="card" id="cardyb">
+            <div class="card-header bg-info">
+                <b class="fas fa-h1">Recientes</b>
             </div>
+            <div class="card-body bg-light">
 
+
+                <div class="row">
+                    <hr>
+                    Link: <a href="unlugar.php"> <?php echo $link = md5("unlinkcualquiera"); ?></a><br>
+                    <br>
+                    <hr>
+                    Nombre: <?php echo $Nombre = "LuigiPhoto.jpg"; ?><br>
+                    Usuario: <?php echo $Usuario = "Luigi"; ?><br>
+                    Hace <?php echo $horas = 5; ?> Horas<br>
+                    <hr>
+
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 <?php } ?>
 </div>
 

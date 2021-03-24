@@ -1,78 +1,37 @@
 {
-    "Default Site": {
-
-        "admin": "archivoscargados.php",
-        "novato": "archivoscargados.php",
-        "avanzado": "archivoscargados.php",
-        "veterano": "archivoscargados.php",
-        "premium": "archivoscargados.php"
-
-    },
-    "Sites": [{
-            "site": "login.php",
+    "Default Site": "archivoscargados.php",
+    "Sites": {
+        "login.php": {
             "access": "public",
-            "role": [""]
+            "role": "Any"
         },
-        {
-            "site": "amarchivo.php",
-            "access": "private",
-            "role": ["admin", "novato"]
+        "registro.php": {
+            "access": "public",
+            "role": "Any"
         },
-        {
-            "site": "archivoscargados.php",
+        "archivoscargados.php": {
             "access": "private",
-            "role": "admin"
+            "role": "Any"
         },
-        {
-            "site": "archivoscargados.php",
+        "amarchivo.php": {
             "access": "private",
-            "role": "novato"
+            "role": "Any"
         },
-        {
-            "site": "eliminararchivos.php",
+        "accionLogin.php": {
             "access": "private",
-            "role": "admin"
+            "role": "Any"
         },
-        {
-            "site": "eliminararchivos.php",
+        "administrarcontenido.php": {
             "access": "private",
-            "role": "novato"
+            "role": "Administrador"
         },
-        {
-            "site": "eliminararchivos.php",
+        "administraroles.php": {
             "access": "private",
-            "role": "admin"
+            "role": "Administrador"
         },
-        {
-            "site": "eliminararchivos.php",
+        "administrarusuarios.php": {
             "access": "private",
-            "role": "novato"
-        },
-        {
-            "site": "eliminararchivocompartido.php",
-            "access": "private",
-            "role": "admin"
-        },
-        {
-            "site": "eliminararchivocompartido.php",
-            "access": "private",
-            "role": "novato"
-        },
-        {
-            "site": "administrarusuarios.php",
-            "access": "private",
-            "role": "admin"
-        },
-        {
-            "site": "administrarroles.php",
-            "access": "private",
-            "role": "admin"
-        },
-        {
-            "site": "administrarcontenido.php",
-            "access": "private",
-            "role": "admin"
+            "role": "Administrador"
         }
-    ]
-
+    }
 }

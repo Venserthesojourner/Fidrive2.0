@@ -1,12 +1,12 @@
 <?php
-$GLOBALS['ROOT'] =$_SERVER['DOCUMENT_ROOT'] ."/Fidrive2.0/";
+$GLOBALS['ROOT'] = $_SERVER['DOCUMENT_ROOT'] . "/Fidrive2.0/";
 
 spl_autoload_register(function ($clase) {
 	//echo "Cargamos la clase  " . $clase . "<br>";
 	$directorys = array(
 		$GLOBALS['ROOT'] . 'Modelo/',
 		$GLOBALS['ROOT'] . 'Control/',
-/* 		$GLOBALS['ROOT'] . 'Utilitarios/',
+		/* 		$GLOBALS['ROOT'] . 'Utilitarios/',
 		$GLOBALS['ROOT'] . 'Vistas/', */
 	);
 	//print_r($directorys);
@@ -19,25 +19,7 @@ spl_autoload_register(function ($clase) {
 	}
 });
 
-$dbc = new databaseController();
-/* $dbcus = new decoUsuarioController($dbc);
+include_once("./Control/controlSession.php");
 
- $datosus = ["usnombre"=> "Ujas",
-	"usapellido"=> "HOLE",
-	"uslogin"=> "GenerineW",
-	"usclave"=> "Ujiks"];
-
-$objus = $dbcus->insertarElemento($datosus);
-
-print_r($objus);
-
-$objusac = $dbcus->actualizarElemento($objus,["usapellido"=> "Otro",
-"uslogin"=> "NewGeneric2",]);
-
-print_r($objusac); */
-
-$dbdmc = new decoDinamicMenuContent($dbc);
-
-?>
-
-
+if (session::sessionExists());
+if (session::sessionActiva()) echo "Activa";

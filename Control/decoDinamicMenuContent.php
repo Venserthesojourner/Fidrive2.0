@@ -1,4 +1,4 @@
 <?php
-class decoDinamicMenuContent extends databaseControllerDecorator{
-
+class decoDinamicMenuContent extends databaseControllerDecorator
+{
 }

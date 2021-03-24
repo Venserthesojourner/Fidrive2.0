@@ -1,38 +1,40 @@
 /* This is a css file which will contain the stylesheet for our site */
 
 .btn.btn-primary.custom-btn {
-	background-color: #838383;
-	border-color: #838383;
+    background-color: #838383;
+    border-color: #838383;
 }
+
 
 /* Estilos Truchos para la Password */
 
-.generic{
-	background-color: black;
-	font-weight: Bold;
-	color: Whitesmoke;
-	font-size: 15px;
-  }
-  
-  .ok{
-	background-color: green;
-	font-weight: Bold;
-	color: Whitesmoke;
-	font-size: 15px;
-  }
-  
-  .alert {
-	background-color: orange;
-	font-weight: Bold;
-	color: Whitesmoke;
-	font-size: 15px;
-  }
-  
-  .error {
-	background-color: red;
-	font-weight: Bold;
-	color: Whitesmoke;
-	font-size: 15px;
-  }
+.generic {
+    background-color: black;
+    font-weight: Bold;
+    color: Whitesmoke;
+    font-size: 15px;
+}
 
-  /* Estilos Truchos para la Password */
+.ok {
+    background-color: green;
+    font-weight: Bold;
+    color: Whitesmoke;
+    font-size: 15px;
+}
+
+.alert {
+    background-color: orange;
+    font-weight: Bold;
+    color: Whitesmoke;
+    font-size: 15px;
+}
+
+.error {
+    background-color: red;
+    font-weight: Bold;
+    color: Whitesmoke;
+    font-size: 15px;
+}
+
+
+/* Estilos Truchos para la Password */

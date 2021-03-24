@@ -1,56 +1,51 @@
 <?php
 include_once("../../config.php");
 
-date_default_timezone_set ( "America/Argentina/San_Luis" );
+date_default_timezone_set("America/Argentina/San_Luis");
 
 /**
  * Cargamos arreglo de datos
  */
 
+$conexion = new databaseController();
 $control = new controlDatos();
+
 $control->setearArregloDatos($array = data_submitted());
 $datos = $control->getDatos();
 
-/* 
-if (isset($datos['usuarioLogin']) && isset($datos['passwordLogin'])) {
-    
-    $valid = controlLogin::verificarPass($datos['usuarioLogin'], $datos['passwordLogin']);
-    if(isset($valid)){
-        
-        $nombreUs = $datos['usuarioLogin'];
-        $datosSession = controlLogin::encuentraUsuario($nombreUs);
-        verEstructura($datosSession); 
-        $sesion = new session();
-        $sesion->cargarDatosSession($datosSession); 
-        verEstructura($_SESSION); 
-    } else {
-        header("location: login.php");
-    }
+$session = new controlSession();
 
+if ($session->esPublica()) {
+
+    $session->inicializarSession();
+    $session->cerrarSession();
 } else {
-    if(isset($_SESSION)){
-        verEstructura($_SESSION); 
+
+
+    if (!session::sessionActiva()) {
+
+        if (array_key_exists("passwordLogin", $datos) && array_key_exists("usuarioLogin", $datos)) {
+            $user = new controlLogin();
+            $datosusuario = $user->encuentraUsuario($datos["usuarioLogin"]);
+
+            if ($user->verificarPass($datos["usuarioLogin"], $datos["passwordLogin"])) {
+                $session->inicializarSession();
+                $session->cargarDatosSession($datosusuario);
+            } else {
+                header("Location: ../Acciones/accionLogin.php");
+            }
+        } else {
+
+            $session->inicializarSession();
+
+            if ($session->sesionActual()->obtenerDatosSession("uslogin")) {
+            } else {
+                header("Location: ../Indices/" . constant('URL') . "");
+            }
+        }
     }
 
-} */
+    $listaroles = $session->sesionActual()->obtenerDatosSession("listaroles");
 
-
-
-//verEstructura($_SESSION);
-
-/* if(!isset($_SESSION)){
-    echo "HOLA IF EXISTE";
-    $sesion = new controlSession();
-    $nombreUs = $sesion->sesionActual()->obtenerDatosSession('uslogin');
-    $datosSession = controlLogin::encuentraUsuario($nombreUs);
-    //verEstructura($datosSession);
-    
-    controlSession::cargarDatosSession($datosSession); 
-    $sesion->ValidarSession();  
-}else { 
-    
-    $sesion = new controlSession();
-} */
-?>
-
-
+    if (!($session->estaAutorizado($listaroles)) && ($session->paginaActual() != "archivoscargados.php")) header("Location: ../Indices/archivoscargados.php");
+}
